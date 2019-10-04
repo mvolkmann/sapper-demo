@@ -19,6 +19,7 @@ app
 		//sirv('static', { dev }),
     //express.static(path.resolve(__dirname, 'static')),
     express.static('static'),
+    express.json(),
 
 		sapper.middleware()
 	)

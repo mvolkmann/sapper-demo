@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectId} = require('mongodb');
 
 // MongoDB thinks localhost is a different database instance than 127.0.0.1.
 // mongo shell uses 127.0.0.1, so use that to hit the same instance.
@@ -26,7 +26,23 @@ async function setCollection() {
   }
 }
 
+export async function del(req, res, next) {
+  const {id} = req.query;
+  try {
+    await setCollection();
+    const result = await collection.deleteOne({_id: ObjectId(id)})
+    if (result.deletedCount === 0) {
+      res.status(400).send(`no dog with id ${id} found`)
+    } else {
+      res.end();
+    }
+  } catch (e) {
+    res.status(500).json({error: e.message});
+  }
+}
+
 export async function get(req, res, next) {
+  console.log('dogs.json.js get: entered');
   try {
     // To test error handling ...
     //throw new Error('bad thing happened');
@@ -46,11 +62,22 @@ export async function get(req, res, next) {
     res.end(JSON.stringify(result));
   } catch (e) {
     res.status(500).json({error: e.message});
-  } finally {
-    //if (client) client.close();
+  // } finally {
+  //   if (client) client.close();
   }
 }
 
 export async function post(req, res, next) {
-  await setCollection();
+  const {body} = req;
+  try {
+    await setCollection();
+
+    const result = await collection.insertOne(body);
+    const id = result.insertedId;
+    console.log('dogs.json.js post: id =', id);
+    const obj = result.ops[0];
+    res.end(JSON.stringify(obj));
+  } catch (e) {
+    res.status(500).json({error: e.message});
+  }
 }
