@@ -12,5 +12,4 @@ export function get(req, res, next) {
     'Content-Type': 'application/json'
   });
   res.end(contents);
-  next();
 }

@@ -14,8 +14,6 @@ export async function del(req, res, next) {
     }
   } catch (e) {
     res.status(500).json({error: e.message});
-  } finally {
-    next();
   }
 }
 
@@ -35,7 +33,5 @@ export async function put(req, res, next) {
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});
-  } finally {
-    next();
   }
 }

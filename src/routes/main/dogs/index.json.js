@@ -29,8 +29,6 @@ export async function get(req, res, next) {
     res.end(JSON.stringify(result));
   } catch (e) {
     res.status(500).json({error: e.message});
-  } finally {
-    next();
   }
 }
 
@@ -43,7 +41,5 @@ export async function post(req, res, next) {
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});
-  } finally {
-    next();
   }
 }
