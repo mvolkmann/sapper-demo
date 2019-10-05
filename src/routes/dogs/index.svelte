@@ -1,9 +1,5 @@
-<svelte:head>
-	<title>About</title>
-</svelte:head>
-
 <script context="module">
-  export async function preload(page, session) {
+  export async function preload() {
     try {
       // Use this.fetch only in module context?
       const res = await this.fetch('dogs');
@@ -37,7 +33,9 @@
 
   $: saveBtnText = id ? 'Modify' : 'Add';
 
-  $: sortedDogs = Object.values(dogMap).sort((dog1, dog2) => dog1.name.localeCompare(dog2.name));
+  $: sortedDogs = Object.values(dogMap).sort((dog1, dog2) =>
+    dog1.name.localeCompare(dog2.name)
+  );
   $: console.log('dogMap =', dogMap);
   // $: console.log('id =', id);
   $: console.log('sortedDogs =', sortedDogs);
@@ -103,7 +101,8 @@
     margin-left: 0.5rem;
   }
 
-  button, input {
+  button,
+  input {
     border: solid lightgray 1px;
     border-radius: 4px;
     font-size: 14px;
@@ -124,7 +123,7 @@
   }
 
   form > div {
-    margin-bottom: 0.5rem
+    margin-bottom: 0.5rem;
   }
 
   input {
@@ -136,6 +135,9 @@
   }
 </style>
 
+<svelte:head>
+  <title>About</title>
+</svelte:head>
 <h1>Dogs</h1>
 
 {#if error}
@@ -144,9 +146,7 @@
   {#each sortedDogs as dog}
     <div class="dog-row">
       {dog.name} is a {dog.breed}.
-      <button class="borderless" on:click={() => editDog(dog)}>
-        &#x270E;
-      </button>
+      <button class="borderless" on:click={() => editDog(dog)}>&#x270E;</button>
       <button class="borderless" on:click={() => deleteDog(dog._id)}>
         &#x1F5D1;
       </button>

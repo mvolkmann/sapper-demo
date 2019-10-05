@@ -2,13 +2,13 @@
 const {ObjectId} = require('mongodb');
 import {getCollection} from './_helpers.js';
 
-export async function del(req, res, next) {
+export async function del(req, res) {
   const {id} = req.params;
   try {
     const collection = await getCollection();
-    const result = await collection.deleteOne({_id: ObjectId(id)})
+    const result = await collection.deleteOne({_id: ObjectId(id)});
     if (result.deletedCount === 0) {
-      res.status(400).send(`no dog with id ${id} found`)
+      res.status(400).send(`no dog with id ${id} found`);
     } else {
       res.end();
     }
@@ -17,7 +17,7 @@ export async function del(req, res, next) {
   }
 }
 
-export async function put(req, res, next) {
+export async function put(req, res) {
   const {id} = req.params;
   const dog = req.body;
   try {

@@ -1,5 +1,4 @@
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
 
 // MongoDB thinks localhost is a different database instance than 127.0.0.1.
 // mongo shell uses 127.0.0.1, so use that to hit the same instance.
