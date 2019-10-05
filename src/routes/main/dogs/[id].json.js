@@ -2,7 +2,7 @@
 const {ObjectId} = require('mongodb');
 import {getCollection} from './_helpers.js';
 
-export async function del(req, res) {
+export async function del(req, res, next) {
   const {id} = req.params;
   try {
     const collection = await getCollection();
@@ -14,10 +14,12 @@ export async function del(req, res) {
     }
   } catch (e) {
     res.status(500).json({error: e.message});
+  } finally {
+    next();
   }
 }
 
-export async function put(req, res) {
+export async function put(req, res, next) {
   const {id} = req.params;
   const replacement = req.body;
   delete replacement._id; // can't have this
@@ -30,5 +32,7 @@ export async function put(req, res) {
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});
+  } finally {
+    next();
   }
 }

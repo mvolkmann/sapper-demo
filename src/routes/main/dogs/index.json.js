@@ -1,7 +1,7 @@
 // This file is for routes that do not require any path parameters.
 import {getCollection} from './_helpers.js';
 
-export async function get(req, res) {
+export async function get(req, res, next) {
   try {
     // To test error handling ...
     //throw new Error('bad thing happened');
@@ -29,10 +29,12 @@ export async function get(req, res) {
     res.end(JSON.stringify(result));
   } catch (e) {
     res.status(500).json({error: e.message});
+  } finally {
+    next();
   }
 }
 
-export async function post(req, res) {
+export async function post(req, res, next) {
   const dog = req.body;
   try {
     const collection = await getCollection();
@@ -41,5 +43,7 @@ export async function post(req, res) {
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});
+  } finally {
+    next();
   }
 }
