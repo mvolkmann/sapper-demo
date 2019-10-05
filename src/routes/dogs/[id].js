@@ -1,3 +1,4 @@
+// This file is for routes that require one path parameter.
 const {ObjectId} = require('mongodb');
 import {getCollection} from './_helpers.js';
 

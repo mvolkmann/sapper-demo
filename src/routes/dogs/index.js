@@ -1,3 +1,4 @@
+// This file is for routes that do not require any path parameters.
 import {getCollection} from './_helpers.js';
 
 export async function get(req, res, next) {
