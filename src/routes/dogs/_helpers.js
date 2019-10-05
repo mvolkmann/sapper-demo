@@ -10,18 +10,13 @@ const url = 'mongodb://127.0.0.1:27017';
 
 const options = {useNewUrlParser: true, useUnifiedTopology: true};
 
-let client;
-let db;
 let collection;
 
 export async function getCollection() {
   if (!collection) {
-    if (!db) {
-      if (!client) {
-        client = await MongoClient.connect(url, options);
-      }
-      db = client.db('animals');
-    }
+    const client = await MongoClient.connect(url, options);
+    const db = client.db('animals');
+    //eslint-disable-next-line require-atomic-updates
     collection = await db.collection('dogs');
   }
 
