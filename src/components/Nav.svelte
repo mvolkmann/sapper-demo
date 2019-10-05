@@ -3,7 +3,10 @@
   import NavItem from './NavItem.svelte';
   export let segment;
 
-  const logout = () => $authenticated = false;
+  function logout() {
+    $authenticated = false;
+    window.sessionStorage.removeItem('authenticated');
+  }
 </script>
 
 <style>

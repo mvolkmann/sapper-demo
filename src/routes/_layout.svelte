@@ -1,9 +1,14 @@
 <script>
+  import {onMount} from 'svelte';
   import {authenticated} from '../stores';
   import Nav from '../components/Nav.svelte';
 
   // This prop is automatically passed to all layouts.
   export let segment;
+
+  onMount(() => {
+    $authenticated = window.sessionStorage.getItem('authenticated') === 'true';
+  });
 </script>
 
 <style>

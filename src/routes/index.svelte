@@ -16,6 +16,7 @@
 
   function login() {
     //TODO: Verify username and password.
+    window.sessionStorage.setItem('authenticated', true);
     $authenticated = true;
     sapper.goto('home');
   }
