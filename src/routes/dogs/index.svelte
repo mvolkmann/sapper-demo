@@ -2,7 +2,7 @@
   export async function preload() {
     try {
       // Use this.fetch only in module context?
-      const res = await this.fetch('main/dogs.json');
+      const res = await this.fetch('dogs.json');
       const result = await res.json();
 
       // Properties in the object returned are passed to this component as props.
@@ -49,7 +49,7 @@
     console.log('about.svelte deleteDog: id =', id);
     try {
       const options = {method: 'DELETE'};
-      const res = await fetch(`main/dogs/${id}.json`, options);
+      const res = await fetch(`dogs/${id}.json`, options);
       if (!res.ok) throw new Error('failed to delete dog with id ' + id);
       delete dogMap[id];
       dogMap = dogMap;
@@ -81,7 +81,7 @@
       //const path = 'dogs' + (id ? '/' + id : '') + '.json';
       const path = id ? `dogs/${id}.json` : 'dogs.json';
       console.log('index.svelte saveDog: id =', id);
-      const res = await fetch('main/' + path, options);
+      const res = await fetch(path, options);
       let result = await res.json();
       console.log('index.svelte saveDog: result =', result);
 

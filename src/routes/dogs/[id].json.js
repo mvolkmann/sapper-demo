@@ -1,6 +1,6 @@
 // This file is for routes that require one path parameter.
 const {ObjectId} = require('mongodb');
-import {getCollection} from './_helpers.js';
+import {getCollection} from './_helpers';
 
 export async function del(req, res) {
   const {id} = req.params;

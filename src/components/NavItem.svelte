@@ -1,4 +1,7 @@
 <script>
+  import {createEventDispatcher} from 'svelte';
+  const dispatch = createEventDispatcher();
+
   export let main = false; // wanted to name this "default", but that's a keyword
   export let href = undefined;
   export let name; // required
@@ -13,6 +16,8 @@
 
   const getClass = segment =>
     main ? (segment ? '' : 'selected') : segment === name ? 'selected' : '';
+
+  const handleClick = () => dispatch('click');
 </script>
 
 <style>
@@ -48,7 +53,8 @@
 </style>
 
 <li>
-  <a {rel} class={getClass(segment)} href={href || 'main/' + name}>
+  <!-- TODO: Why can't I just use "on:click" on the next line? -->
+  <a {rel} class={getClass(segment)} href={href || name} on:click={handleClick}>
     {capitalize(name)}
   </a>
 </li>
