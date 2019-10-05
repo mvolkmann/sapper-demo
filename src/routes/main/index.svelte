@@ -45,7 +45,5 @@
 </figure>
 
 <p>
-  <strong>
-    Edit src/routes/index.svelte to test live reloading.
-  </strong>
+  <strong>Edit src/routes/index.svelte to test live reloading.</strong>
 </p>

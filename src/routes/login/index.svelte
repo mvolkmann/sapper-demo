@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import {onMount} from 'svelte';
   import * as sapper from '@sapper/app';
   import LabeledInput from '../../components/LabeledInput.svelte';
 
@@ -73,7 +73,10 @@
   <div class="right">
     <h1>Login</h1>
     <form>
-      <LabeledInput bind:inputRef={usernameInput} label="Username" bind:value={username} />
+      <LabeledInput
+        bind:inputRef={usernameInput}
+        label="Username"
+        bind:value={username} />
       <LabeledInput label="Password" type="password" bind:value={password} />
       <button disabled={!username || !password} on:click|preventDefault={login}>
         Login

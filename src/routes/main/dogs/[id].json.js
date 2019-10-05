@@ -26,7 +26,10 @@ export async function put(req, res, next) {
 
   try {
     const collection = await getCollection();
-    const result = await collection.replaceOne({_id: ObjectId(id)}, replacement);
+    const result = await collection.replaceOne(
+      {_id: ObjectId(id)},
+      replacement
+    );
     const [obj] = result.ops;
     obj._id = id; // missing this
     res.end(JSON.stringify(obj));
