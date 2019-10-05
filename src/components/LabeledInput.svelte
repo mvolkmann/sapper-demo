@@ -1,6 +1,7 @@
 <script>
   import LabeledChildren from './LabeledChildren.svelte';
 
+  export let inputRef = null;
   export let label = '';
   export let type = 'text';
   export let value = '';
@@ -8,14 +9,6 @@
   const onChange = event => (value = event.target.value);
 </script>
 
-<style>
-  input {
-    border: solid gray 1px;
-    border-radius: 4px;
-    padding: 4px;
-  }
-</style>
-
 <LabeledChildren {label}>
-  <input {type} {value} on:input={onChange} />
+  <input bind:this={inputRef} {type} {value} on:input={onChange} />
 </LabeledChildren>

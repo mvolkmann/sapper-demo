@@ -16,13 +16,14 @@
   }
 
   label {
-    color: black;
+    //color: black;
     font-weight: bold;
     margin-bottom: 0.5rem;
   }
 </style>
 
 <div class={'container ' + className}>
-  <label class="title">{label}</label>
+  <!-- Giving this a class allows it to be styled from outside. -->
+  <label class="label">{label}</label>
   <slot />
 </div>

@@ -6,27 +6,22 @@
 </script>
 
 <style>
-  nav {
-    border-bottom: 1px solid rgba(255, 62, 0, 0.1);
-    font-weight: 300;
-    padding: 0 1em;
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  /* clearfix */
-  ul::after {
-    content: '';
+  a {
+    text-decoration: none;
+    padding: 1em 0.5em;
     display: block;
-    clear: both;
   }
 
   li {
     display: block;
     float: left;
+  }
+
+  nav {
+    border-bottom: 1px solid rgba(255, 62, 0, 0.1);
+    font-weight: 300;
+    height: var(--nav-height);
+    padding: 0 1em;
   }
 
   .selected {
@@ -44,26 +39,35 @@
     bottom: -1px;
   }
 
-  a {
-    text-decoration: none;
-    padding: 1em 0.5em;
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* clearfix */
+  ul::after {
+    content: '';
     display: block;
+    clear: both;
   }
 </style>
 
 <nav>
   <ul>
     <li>
-      <a class={getClass(segment)} href=".">home</a>
+      <a class={getClass(segment)} href="main">Home</a>
     </li>
     <li>
-      <a class={getClass(segment, 'dogs')} href="dogs">dogs</a>
+      <a class={getClass(segment, 'dogs')} href="main/dogs">Dogs</a>
     </li>
 
     <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
     <li>
-      <a rel="prefetch" class={getClass(segment, 'blog')} href="blog">blog</a>
+      <a rel="prefetch" class={getClass(segment, 'blog')} href="main/blog">Blog</a>
+    </li>
+    <li>
+      <a href=".">Logout</a>
     </li>
   </ul>
 </nav>
