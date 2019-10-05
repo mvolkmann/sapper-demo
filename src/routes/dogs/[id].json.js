@@ -19,12 +19,14 @@ export async function del(req, res) {
 
 export async function put(req, res) {
   const {id} = req.params;
-  const dog = req.body;
+  const replacement = req.body;
+  delete replacement._id; // can't have this
+
   try {
     const collection = await getCollection();
-
-    const result = await collection.replaceOne({_id: id}, dog);
-    const obj = result.ops[0];
+    const result = await collection.replaceOne({_id: ObjectId(id)}, replacement);
+    const [obj] = result.ops;
+    obj._id = id; // missing this
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});

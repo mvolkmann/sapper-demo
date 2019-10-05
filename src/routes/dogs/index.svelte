@@ -2,7 +2,7 @@
   export async function preload() {
     try {
       // Use this.fetch only in module context?
-      const res = await this.fetch('dogs');
+      const res = await this.fetch('dogs.json');
       const result = await res.json();
 
       // Properties in the object returned are passed to this component as props.
@@ -36,9 +36,9 @@
   $: sortedDogs = Object.values(dogMap).sort((dog1, dog2) =>
     dog1.name.localeCompare(dog2.name)
   );
-  $: console.log('dogMap =', dogMap);
+  // $: console.log('dogMap =', dogMap);
   // $: console.log('id =', id);
-  $: console.log('sortedDogs =', sortedDogs);
+  // $: console.log('sortedDogs =', sortedDogs);
 
   function clearState() {
     id = breed = name = '';
@@ -49,8 +49,7 @@
     console.log('about.svelte deleteDog: id =', id);
     try {
       const options = {method: 'DELETE'};
-      const res = await fetch('dogs/' + id, options);
-      //const res = await fetch('dogs?id=' + id, options);
+      const res = await fetch(`dogs/${id}.json`, options);
       if (!res.ok) throw new Error('failed to delete dog with id ' + id);
       delete dogMap[id];
       dogMap = dogMap;
@@ -78,10 +77,13 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(dog)
       };
-      // Use this.fetch only in module context?
-      const path = 'dogs' + (id ? '/' + id : '');
+      // Use this.fetch only in module context.
+      //const path = 'dogs' + (id ? '/' + id : '') + '.json';
+      const path = id ? `dogs/${id}.json` : 'dogs.json';
+      console.log('index.svelte saveDog: id =', id);
       const res = await fetch(path, options);
       let result = await res.json();
+      console.log('index.svelte saveDog: result =', result);
 
       if (!res.ok) throw new Error(result.error);
 
@@ -138,6 +140,7 @@
 <svelte:head>
   <title>About</title>
 </svelte:head>
+
 <h1>Dogs</h1>
 
 {#if error}

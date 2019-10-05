@@ -29,8 +29,6 @@ export async function get(req, res) {
     res.end(JSON.stringify(result));
   } catch (e) {
     res.status(500).json({error: e.message});
-    // } finally {
-    //   if (client) client.close();
   }
 }
 
@@ -38,10 +36,8 @@ export async function post(req, res) {
   const dog = req.body;
   try {
     const collection = await getCollection();
-
     const result = await collection.insertOne(dog);
-    //const id = result.insertedId;
-    const obj = result.ops[0];
+    const [obj] = result.ops;
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});

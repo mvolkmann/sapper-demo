@@ -15,6 +15,7 @@ let collection;
 export async function getCollection() {
   if (!collection) {
     const client = await MongoClient.connect(url, options);
+    //TODO: Is it okay that you never call client.close()?
     const db = client.db('animals');
     //eslint-disable-next-line require-atomic-updates
     collection = await db.collection('dogs');

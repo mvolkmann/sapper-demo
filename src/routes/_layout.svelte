@@ -6,17 +6,20 @@
 
 <style>
   main {
-    position: relative;
-    max-width: 56em;
+    display: flex;
+    justify-content: center;
+
     background-color: white;
-    padding: 2em;
-    margin: 0 auto;
     box-sizing: border-box;
+    padding: 2em;
+    width: 100vw;
   }
 </style>
 
 <Nav {segment} />
 
 <main>
-  <slot />
+  <section>
+    <slot />
+  </section>
 </main>
