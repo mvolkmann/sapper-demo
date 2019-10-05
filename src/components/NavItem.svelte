@@ -1,14 +1,18 @@
 <script>
-  export let href = undefined; // not required
-  export let name;
-  export let rel = undefined; // not required
-  export let segment;
+  export let main = false; // wanted to name this "default", but that's a keyword
+  export let href = undefined;
+  export let name; // required
+  export let rel = undefined;
+  export let segment; // required
 
   const capitalize = text =>
     text
       .split(' ')
       .map(word => word[0].toUpperCase() + word.substring(1).toLowerCase())
       .join(' ');
+
+  const getClass = segment =>
+    main ? (segment ? '' : 'selected') : segment === name ? 'selected' : '';
 </script>
 
 <style>
@@ -44,7 +48,7 @@
 </style>
 
 <li>
-  <a {rel} class={segment === name ? 'selected' : ''} href={href || 'main/' + name}>
+  <a {rel} class={getClass(segment)} href={href || 'main/' + name}>
     {capitalize(name)}
   </a>
 </li>

@@ -2,7 +2,7 @@
 const {ObjectId} = require('mongodb');
 import {getCollection} from './_helpers.js';
 
-export async function del(req, res, next) {
+export async function del(req, res) {
   const {id} = req.params;
   try {
     const collection = await getCollection();
@@ -17,7 +17,7 @@ export async function del(req, res, next) {
   }
 }
 
-export async function put(req, res, next) {
+export async function put(req, res) {
   const {id} = req.params;
   const replacement = req.body;
   delete replacement._id; // can't have this

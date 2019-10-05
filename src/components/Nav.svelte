@@ -15,18 +15,11 @@
     margin: 0;
     padding: 0;
   }
-
-  /* clearfix */
-  ul::after {
-    content: '';
-    display: block;
-    clear: both;
-  }
 </style>
 
 <nav>
   <ul>
-    <NavItem {segment} href="main" name="home" />
+    <NavItem main {segment} href="main" name="home" />
     <NavItem {segment} name="animations" />
     <NavItem {segment} name="dogs" />
     <!-- Using rel=prefetch so Sapper prefetches the blog data

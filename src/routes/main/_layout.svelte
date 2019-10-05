@@ -1,6 +1,7 @@
 <script>
   import Nav from '../../components/Nav.svelte';
 
+  // This prop is automatically passed to all layouts.
   export let segment;
 </script>
 
