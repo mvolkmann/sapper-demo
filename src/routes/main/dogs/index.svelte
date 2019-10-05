@@ -98,9 +98,12 @@
 
 <style>
   .borderless {
-    border: none;
+    background-color: transparent;
     font-size: 18px;
     margin-left: 0.5rem;
+  }
+  .borderless:hover {
+    background-color: lightgreen;
   }
 
   .dog-row {

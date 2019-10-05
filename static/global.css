@@ -16,7 +16,7 @@ body {
 
 button,
 input {
-  border: solid lightgray 1px;
+  border: none;
   border-radius: 4px;
   font-size: 14px;
   padding: 10px;
