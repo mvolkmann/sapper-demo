@@ -1,16 +1,33 @@
+<script>
+  import {createCounter} from '../stores.js';
+
+  const counter = createCounter();
+</script>
+
 <style>
-  h1,
-  figure,
-  p {
+  .counter {
+    display: flex;
+    align-items: center;
+  }
+
+  .counter > * {
+    margin-left: 0.5rem;
+  }
+
+  .counter > .count {
     text-align: center;
-    margin: 0 auto;
+    width: 50px;
+  }
+
+  figure,
+  h1 {
+    text-align: center;
   }
 
   h1 {
-    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 1rem;
     text-transform: uppercase;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
   }
 
   figure {
@@ -22,28 +39,20 @@
     max-width: 400px;
     margin: 0 0 1em 0;
   }
-
-  p {
-    margin: 1em auto;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      font-size: 4em;
-    }
-  }
 </style>
 
 <svelte:head>
-  <title>Sapper project template</title>
+  <title>Home</title>
 </svelte:head>
 
 <h1>Great success!</h1>
-
 <figure>
   <img alt="Borat" src="great-success.png" />
 </figure>
 
-<p>
-  <strong>Edit src/routes/index.svelte to test live reloading.</strong>
-</p>
+<div class="counter">
+  <button on:click={() => counter.decrement()}>-</button>
+  <div class="count">{$counter}</div>
+  <button on:click={() => counter.increment()}>+</button>
+  <button on:click={() => counter.reset()}>Reset</button>
+</div>

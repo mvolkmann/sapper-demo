@@ -3,7 +3,10 @@
   export let label = '';
 </script>
 
-<style>
+<style lang="scss">
+  /*TODO: Why doesn't this work? */
+  $color: green;
+
   .container {
     display: inline-flex;
     flex-direction: column;
@@ -16,7 +19,7 @@
   }
 
   label {
-    //color: black;
+    color: $color;
     font-weight: bold;
     margin-bottom: 0.5rem;
   }

@@ -22,5 +22,5 @@
   "plugins": ["import", "svelte3"],
   "rules": {
     "no-console": "off"
-   }
+  }
 }

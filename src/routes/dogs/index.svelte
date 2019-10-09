@@ -96,7 +96,9 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  $color: green;
+
   .borderless {
     background-color: transparent;
     font-size: 18px;
@@ -124,6 +126,7 @@
   }
 
   label {
+    border: solid $color 1px;
     margin-right: 0.5rem;
   }
 </style>
