@@ -4,7 +4,7 @@
 </script>
 
 <style lang="scss">
-  /*TODO: Why doesn't this work? */
+  /* VS Code complains about this, but it works in Svelte. */
   $color: green;
 
   .container {

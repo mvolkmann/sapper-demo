@@ -21,19 +21,29 @@
   }
 </script>
 
-<script>
+<script lang="typescript">
+  interface Dog {
+    _id?: string,
+    breed: string,
+    name: string
+  }
+
+  interface DogMap {
+    [key: string]: Dog
+  }
+
   // The preload function passes these props.
-  export let dogMap = {};
-  export let error = null;
+  export let dogMap: DogMap = {};
+  export let error = '';
 
-  let breed = '';
-  let breedInput;
-  let id = '';
-  let name = '';
+  let breed: string = '';
+  let breedInput: any;
+  let id: string = '';
+  let name: string = '';
 
-  $: saveBtnText = id ? 'Modify' : 'Add';
+  $: saveBtnText: string = id ? 'Modify' : 'Add';
 
-  $: sortedDogs = Object.values(dogMap).sort((dog1, dog2) =>
+  $: sortedDogs = Object.values(dogMap).sort((dog1: Dog, dog2: Dog) =>
     dog1.name.localeCompare(dog2.name)
   );
   // $: console.log('dogMap =', dogMap);
@@ -45,7 +55,7 @@
     breedInput.focus();
   }
 
-  async function deleteDog(id) {
+  async function deleteDog(id: number) {
     console.log('about.svelte deleteDog: id =', id);
     try {
       const options = {method: 'DELETE'};
@@ -59,7 +69,7 @@
     }
   }
 
-  function editDog(dog) {
+  function editDog(dog: Dog) {
     ({breed, name} = dog);
     id = dog._id;
   }

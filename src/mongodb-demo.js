@@ -10,6 +10,18 @@ const url = 'mongodb://127.0.0.1:27017';
 
 const options = {useNewUrlParser: true, useUnifiedTopology: true};
 
+/*
+const client = new MongoClient(url);
+client.connect(err => {
+  const collection = client.db('animals').collection('dogs');
+  collection.insertOne({breed: 'Whippet', name: 'Dasher'});
+  collection.find().toArray((err, items) => {
+    console.log('mongodb-demo.js x: items =', items);
+  });
+  client.close();
+});
+*/
+
 async function doIt() {
   let client;
   try {

@@ -8,11 +8,6 @@ import sveltePreprocess from 'svelte-preprocess';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
-const preprocess = sveltePreprocess({
-  sass: true,
-  typescript: true
-});
-
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
@@ -23,6 +18,11 @@ const onwarn = (warning, onwarn) =>
   onwarn(warning);
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
+
+const preprocess = sveltePreprocess({
+  //sass: true,
+  //typescript: true
+});
 
 export default {
   client: {
@@ -37,25 +37,18 @@ export default {
         dev,
         hydratable: true,
         emitCss: true,
-        /**
-         * Auto preprocess supported languages with
-         * '<template>'/'external src files' support
-         **/
         preprocess
-        /*
+
+        /* This demonstrates a custom preprocessor for <style> elements.
         preprocess: {
-          scss, // doesn't work
           style({content}) {
             // Replace "red" with "blue" in all styles found in .svelte files.
             return {
               code: content.replace(/red/gi, 'blue')
             };
-          },
-          typescript // doesn't work
+          }
         }
         */
-        //TODO: This doesn't work.
-        //preprocess: [scss(), typescript()]
       }),
       resolve({
         browser: true,
