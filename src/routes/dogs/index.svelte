@@ -1,27 +1,31 @@
 <script context="module">
   export async function preload() {
+    console.log('dogs/index.svelte preload: entered');
     try {
-      // Use this.fetch only in module context?
       const res = await this.fetch('dogs.json');
-      const result = await res.json();
-
-      // Properties in the object returned are passed to this component as props.
+      // If the REST service to retrieve all
+      // the dogs is hosted outside of Sapper,
+      // change the argument to `this.fetch` to be that URL.
       if (res.ok) {
-        const dogMap = result.reduce((acc, dog) => {
+        const dogs = await res.json();
+        const dogMap = dogs.reduce((acc, dog) => {
           acc[dog._id] = dog;
           return acc;
         }, {});
+        // Properties in the object returned are passed to this component as props.
         return {dogMap};
       } else {
-        return {error: result.error};
+        const msg = await res.text();
+        this.error(res.statusCode, 'Dogs preload: ' + msg);
       }
     } catch (e) {
-      return {error: e.message};
+      this.error(500, 'Dogs preload error: ' + e.message);
     }
   }
 </script>
 
-<script lang="typescript">
+<script>
+  /*
   interface Dog {
     _id?: string,
     breed: string,
@@ -31,31 +35,33 @@
   interface DogMap {
     [key: string]: Dog
   }
+  */
 
   // The preload function passes these props.
-  export let dogMap: DogMap = {};
+  //export let dogMap: DogMap = {};
+  export let dogMap = {};
   export let error = '';
 
-  let breed: string = '';
-  let breedInput: any;
-  let id: string = '';
-  let name: string = '';
+  let breed = '';
+  let breedInput;
+  let id = '';
+  let name = '';
 
-  $: saveBtnText: string = id ? 'Modify' : 'Add';
+  $: saveBtnText = id ? 'Modify' : 'Add';
 
-  $: sortedDogs = Object.values(dogMap).sort((dog1: Dog, dog2: Dog) =>
+  $: sortedDogs = Object.values(dogMap).sort((dog1, dog2) =>
     dog1.name.localeCompare(dog2.name)
   );
   // $: console.log('dogMap =', dogMap);
   // $: console.log('id =', id);
-  // $: console.log('sortedDogs =', sortedDogs);
+  $: console.log('sortedDogs =', sortedDogs);
 
   function clearState() {
     id = breed = name = '';
     breedInput.focus();
   }
 
-  async function deleteDog(id: number) {
+  async function deleteDog(id) {
     console.log('about.svelte deleteDog: id =', id);
     try {
       const options = {method: 'DELETE'};
@@ -69,7 +75,7 @@
     }
   }
 
-  function editDog(dog: Dog) {
+  function editDog(dog) {
     ({breed, name} = dog);
     id = dog._id;
   }

@@ -1,10 +1,18 @@
 <script>
+  import Adder from '../components/Adder.svelte';
   import {createCounter} from '../stores.js';
 
   const counter = createCounter();
 </script>
 
 <style>
+  a {
+    border: solid gray 1px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 4px;
+    text-decoration: none;
+  }
   .counter {
     display: flex;
     align-items: center;
@@ -49,6 +57,12 @@
 <figure>
   <img alt="Borat" src="great-success.png" />
 </figure>
+
+<a href="/dogs" rel="prefetch">
+  Go To Dogs
+</a>
+
+<Adder title="My Title" />
 
 <div class="counter">
   <button on:click={() => counter.decrement()}>-</button>

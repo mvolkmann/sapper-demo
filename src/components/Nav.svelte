@@ -27,7 +27,7 @@
   <ul>
     <NavItem {segment} name="home" />
     <NavItem {segment} name="animations" href="animations" />
-    <NavItem {segment} name="dogs" />
+    <NavItem {segment} name="dogs" rel="prefetch" />
     <!-- Using rel=prefetch so Sapper prefetches the blog data
          when we hover over the link or tap it on a touchscreen. -->
     <NavItem {segment} name="blog" rel="prefetch" />
