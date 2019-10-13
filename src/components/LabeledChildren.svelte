@@ -16,12 +16,12 @@
     font-size: 14px;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
-  }
 
-  label {
-    color: $color;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    label {
+      color: $color;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
   }
 </style>
 

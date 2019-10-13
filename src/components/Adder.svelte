@@ -1,5 +1,14 @@
+<!-- Only routes can use preload functions,
+     so this is never invoked. -->
+<script context="module">
+  export async function preload() {
+    console.log('Adder.svelte preload: entered');
+  }
+</script>
 <!--script lang="typescript"-->
 <script>
+  import {onMount} from 'svelte';
+
   //TODO: export seems to not be supported when using TypeScript.
   //export const title: string = 'untitled';
   export let title = 'untitled';
@@ -14,6 +23,10 @@
   let sum;
 
   $: sum = n1 + n2;
+
+  onMount(() => {
+    console.log('Adder.svelte onMount: entered');
+  })
 </script>
 
 <style>

@@ -62,7 +62,7 @@
   Go To Dogs
 </a>
 
-<Adder title="My Title" />
+<Adder title="My Adder" />
 
 <div class="counter">
   <button on:click={() => counter.decrement()}>-</button>

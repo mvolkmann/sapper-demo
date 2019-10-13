@@ -54,7 +54,7 @@
   );
   // $: console.log('dogMap =', dogMap);
   // $: console.log('id =', id);
-  $: console.log('sortedDogs =', sortedDogs);
+  // $: console.log('sortedDogs =', sortedDogs);
 
   function clearState() {
     id = breed = name = '';
@@ -131,19 +131,19 @@
 
   form {
     margin-top: 1rem;
-  }
 
-  form > div {
-    margin-bottom: 0.5rem;
-  }
+    & > div {
+      margin-bottom: 0.5rem;
+    }
 
-  input {
-    width: 200px;
-  }
+    input {
+      width: 200px;
+    }
 
-  label {
-    border: solid $color 1px;
-    margin-right: 0.5rem;
+    label {
+      border: solid $color 1px;
+      margin-right: 0.5rem;
+    }
   }
 </style>
 
