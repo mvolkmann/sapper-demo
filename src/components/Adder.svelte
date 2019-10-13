@@ -4,6 +4,10 @@
   export async function preload() {
     console.log('Adder.svelte preload: entered');
   }
+
+  export function add(n1, n2) {
+    return n1 + n2;
+  }
 </script>
 <!--script lang="typescript"-->
 <script>

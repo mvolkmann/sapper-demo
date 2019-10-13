@@ -1,8 +1,14 @@
 <script>
-  import Adder from '../components/Adder.svelte';
+  import {onMount} from 'svelte';
+  import Adder, {add} from '../components/Adder.svelte';
   import {createCounter} from '../stores.js';
 
   const counter = createCounter();
+
+  onMount(() => {
+    const sum = add(1, 3);
+    console.log('home.svelte onMount: sum =', sum);
+  })
 </script>
 
 <style>
