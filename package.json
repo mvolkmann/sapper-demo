@@ -12,7 +12,9 @@
     "lint": "eslint --fix --quiet src --ext .js,.svelte",
     "md": "node src/mongodb-demo.js",
     "start": "node __sapper__/build",
-    "test": "run-p --race dev cy:run"
+    "test": "run-p --race dev cy:run",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "compression": "^1.7.1",
@@ -25,6 +27,11 @@
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
+    "@storybook/addon-actions": "^5.2.4",
+    "@storybook/addon-links": "^5.2.4",
+    "@storybook/addons": "^5.2.4",
+    "@storybook/svelte": "^5.2.4",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.5.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-svelte3": "^2.7.3",
@@ -40,7 +47,8 @@
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.0",
-    "svelte": "^3.0.0",
+    "svelte": "^3.12.1",
+    "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^3.1.2"
   }
 }
