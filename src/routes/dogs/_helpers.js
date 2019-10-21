@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 
 // MongoDB thinks localhost is a different database instance than 127.0.0.1.
-// mongo shell uses 127.0.0.1, so use that to hit the same instance.
+// "mongo" shell uses 127.0.0.1, so use that to hit the same instance.
 // I thought maybe this was an issue with my /etc/host file,
 // but I commented out all the lines that associated 127.0.0.1
 // with something other than localhost and it didn't help.

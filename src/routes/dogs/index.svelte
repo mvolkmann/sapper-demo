@@ -25,6 +25,8 @@
 </script>
 
 <script>
+  import {onMount} from 'svelte';
+
   /*
   interface Dog {
     _id?: string,
@@ -56,6 +58,16 @@
   // $: console.log('id =', id);
   // $: console.log('sortedDogs =', sortedDogs);
 
+  const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+  let colorIndex = 0;
+
+  onMount(() => {
+    const token = setInterval(() => {
+      colorIndex = (colorIndex + 1) % colors.length;
+    }, 500);
+    return () => clearInterval(token);
+  });
+
   function clearState() {
     id = breed = name = '';
     breedInput.focus();
@@ -83,7 +95,7 @@
   // This handles both creating and updating dogs.
   async function saveDog() {
     // If `id` is set, we are updating a dog.
-    // Otherwise we are adding a new dog.
+    // Otherwise we are creating a new dog.
     const dog = {breed, name};
     if (id) dog._id = id;
 
@@ -113,15 +125,8 @@
 </script>
 
 <style lang="scss">
-  $color: green;
-
-  .borderless {
-    background-color: transparent;
-    font-size: 18px;
-    margin-left: 0.5rem;
-  }
-  .borderless:hover {
-    background-color: lightgreen;
+  button {
+    border: none;
   }
 
   .dog-row {
@@ -131,19 +136,28 @@
 
   form {
     margin-top: 1rem;
+  }
 
-    & > div {
-      margin-bottom: 0.5rem;
-    }
+  form > div {
+    margin-bottom: 0.5rem;
+  }
 
-    input {
-      width: 200px;
-    }
+  .icon-btn {
+    background-color: transparent;
+    font-size: 18px;
+    margin-left: 0.5rem;
+  }
 
-    label {
-      border: solid $color 1px;
-      margin-right: 0.5rem;
-    }
+  .icon-btn:hover {
+    background-color: lightgreen;
+  }
+
+  input {
+    width: 200px;
+  }
+
+  label {
+    margin-right: 0.5rem;
   }
 </style>
 
@@ -151,7 +165,7 @@
   <title>About</title>
 </svelte:head>
 
-<h1>Dogs</h1>
+<h1 style="color: {colors[colorIndex]}">Dogs</h1>
 
 {#if error}
   <div class="error">Error: {error}</div>
@@ -159,8 +173,12 @@
   {#each sortedDogs as dog}
     <div class="dog-row">
       {dog.name} is a {dog.breed}.
-      <button class="borderless" on:click={() => editDog(dog)}>&#x270E;</button>
-      <button class="borderless" on:click={() => deleteDog(dog._id)}>
+      <button class="icon-btn" on:click={() => editDog(dog)}>
+        <!-- pencil icon -->
+        &#x270E;
+      </button>
+      <button class="icon-btn" on:click={() => deleteDog(dog._id)}>
+        <!-- trash can icon -->
         &#x1F5D1;
       </button>
     </div>

@@ -53,7 +53,6 @@
 </style>
 
 <li>
-  <!-- TODO: Why can't I just use "on:click" on the next line? -->
   <a {rel} class={getClass(segment)} href={href || name} on:click={handleClick}>
     {capitalize(name)}
   </a>
