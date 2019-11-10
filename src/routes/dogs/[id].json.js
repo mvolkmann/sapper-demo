@@ -20,7 +20,10 @@ export async function del(req, res) {
 export async function put(req, res) {
   const {id} = req.params;
   const replacement = req.body;
-  delete replacement._id; // can't have an _id property
+
+  // The object passed to the MongoDB replaceOne method
+  // cannot have an _id property.
+  delete replacement._id;
 
   try {
     const collection = await getCollection();
@@ -29,7 +32,7 @@ export async function put(req, res) {
       replacement
     );
     const [obj] = result.ops;
-    obj._id = id; // restore _id property
+    obj._id = id; // restore the _id property
     res.end(JSON.stringify(obj));
   } catch (e) {
     res.status(500).json({error: e.message});

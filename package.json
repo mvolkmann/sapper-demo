@@ -11,7 +11,9 @@
     "format": "prettier --write '{public,src}/**/*.{css,html,js,svelte}'",
     "lint": "eslint --fix --quiet src --ext .js,.svelte",
     "md": "node src/mongodb-demo.js",
+    "serve": "serve __sapper__/export",
     "start": "node __sapper__/build",
+    "static": "npm-run-all export serve",
     "test": "run-p --race dev cy:run",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -47,6 +49,7 @@
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.0",
+    "serve": "^11.2.0",
     "svelte": "^3.12.1",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^3.1.2"

@@ -1,20 +1,27 @@
 <script context="module">
+  // This function is called before each time this
+  // component is rendered to get the dogMap data.
   export async function preload() {
     console.log('dogs/index.svelte preload: entered');
     try {
-      const res = await this.fetch('dogs.json');
+      // This invokes the "get" middleware function
+      // defined in index.json.js.
       // If the REST service to retrieve all
       // the dogs is hosted outside of Sapper,
       // change the argument to `this.fetch` to be that URL.
+      const res = await this.fetch('dogs.json');
       if (res.ok) {
         const dogs = await res.json();
+        // Create a map of dog ids to dog objects.
         const dogMap = dogs.reduce((acc, dog) => {
           acc[dog._id] = dog;
           return acc;
         }, {});
-        // Properties in the object returned are passed to this component as props.
+        // Properties in the object returned here
+        // are passed to this component as props.
         return {dogMap};
       } else {
+        // Handle errors.
         const msg = await res.text();
         this.error(res.statusCode, 'Dogs preload: ' + msg);
       }
@@ -39,9 +46,12 @@
   }
   */
 
-  // The preload function passes these props.
+  // The preload function above passes this prop.
   //export let dogMap: DogMap = {};
   export let dogMap = {};
+
+  // Parent components can bind to this prop
+  // to get an error string set by this component.
   export let error = '';
 
   let breed = '';
@@ -62,6 +72,7 @@
   let colorIndex = 0;
 
   onMount(() => {
+    //TODO: I probably should use requestAnimationFrame for this.
     const token = setInterval(() => {
       colorIndex = (colorIndex + 1) % colors.length;
     }, 500);
@@ -105,18 +116,18 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(dog)
       };
-      // Use this.fetch only in module context.
-      //const path = 'dogs' + (id ? '/' + id : '') + '.json';
+
       const path = id ? `dogs/${id}.json` : 'dogs.json';
-      console.log('index.svelte saveDog: id =', id);
+
       const res = await fetch(path, options);
-      let result = await res.json();
+      const result = await res.json();
       console.log('index.svelte saveDog: result =', result);
 
       if (!res.ok) throw new Error(result.error);
 
       dogMap[result._id] = result;
-      dogMap = dogMap;
+      dogMap = dogMap; // triggers reactivity
+
       clearState();
     } catch (e) {
       error = e.message;
@@ -162,7 +173,7 @@
 </style>
 
 <svelte:head>
-  <title>About</title>
+  <title>Dogs</title>
 </svelte:head>
 
 <h1 style="color: {colors[colorIndex]}">Dogs</h1>

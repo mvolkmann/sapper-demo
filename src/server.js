@@ -17,7 +17,6 @@ app
     compression({threshold: 0}),
 
     //sirv('static', { dev }),
-    //express.static(path.resolve(__dirname, 'static')),
     express.static('static'),
     express.json(),
 
