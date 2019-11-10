@@ -3,6 +3,7 @@
     "dedupe",
     "importee",
     "onwarn",
-    "serviceworker"
+    "serviceworker",
+    "sirv"
   ]
 }
