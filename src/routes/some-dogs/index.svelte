@@ -2,14 +2,14 @@
   // This function is called before each time this
   // component is rendered to get the dogMap data.
   export async function preload() {
-    console.log('dogs/index.svelte preload: entered');
+    console.log('some-dogs/index.svelte preload: entered');
     try {
       // This invokes the "get" middleware function
       // defined in index.json.js.
       // If the REST service to retrieve all
       // the dogs is hosted outside of Sapper,
       // change the argument to `this.fetch` to be that URL.
-      const res = await this.fetch('dogs.json');
+      const res = await this.fetch('some-dogs.json');
       if (res.ok) {
         const dogs = await res.json();
         // Create a map of dog ids to dog objects.
@@ -88,7 +88,7 @@
     console.log('about.svelte deleteDog: id =', id);
     try {
       const options = {method: 'DELETE'};
-      const res = await fetch(`dogs/${id}.json`, options);
+      const res = await fetch(`some-dogs/${id}.json`, options);
       if (!res.ok) throw new Error('failed to delete dog with id ' + id);
       delete dogMap[id];
       dogMap = dogMap;
@@ -117,7 +117,7 @@
         body: JSON.stringify(dog)
       };
 
-      const path = id ? `dogs/${id}.json` : 'dogs.json';
+      const path = id ? `some-dogs/${id}.json` : 'some-dogs.json';
 
       const res = await fetch(path, options);
       const result = await res.json();

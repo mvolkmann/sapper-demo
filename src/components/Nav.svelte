@@ -9,6 +9,18 @@
   }
 </script>
 
+<nav>
+  <ul>
+    <NavItem {segment} name="home" />
+    <NavItem {segment} name="animations" />
+    <!-- Using rel=prefetch so Sapper prefetches the blog data
+         when we hover over the link or tap it on a touchscreen. -->
+    <NavItem {segment} name="some-dogs" rel="prefetch" />
+    <NavItem {segment} name="blog" rel="prefetch" />
+    <NavItem {segment} href="/" name="logout" on:click={logout} />
+  </ul>
+</nav>
+
 <style>
   nav {
     border-bottom: 1px solid rgba(255, 62, 0, 0.1);
@@ -22,15 +34,3 @@
     padding: 0;
   }
 </style>
-
-<nav>
-  <ul>
-    <NavItem {segment} name="home" />
-    <NavItem {segment} name="animations" />
-    <!-- Using rel=prefetch so Sapper prefetches the blog data
-         when we hover over the link or tap it on a touchscreen. -->
-    <NavItem {segment} name="dogs" rel="prefetch" />
-    <NavItem {segment} name="blog" rel="prefetch" />
-    <NavItem {segment} href="." name="logout" on:click={logout} />
-  </ul>
-</nav>

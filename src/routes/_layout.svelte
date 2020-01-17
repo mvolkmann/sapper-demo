@@ -5,6 +5,7 @@
 
   // This prop is automatically passed to all layouts.
   export let segment;
+  console.log('_layout.svelte x: segment =', segment);
 
   onMount(() => {
     $authenticated = window.sessionStorage.getItem('authenticated') === 'true';
